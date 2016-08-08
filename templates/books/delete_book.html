@@ -1,0 +1,15 @@
+{%  extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Delete book {% endblock %}
+
+{% block content %}
+
+    <h1>Book {{ book }} will be removed</h1>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete" />
+        </form>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{%  extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Create author {% endblock %}
+
+{% block content %}
+
+    <ul>
+        {% for author in object_list %}
+            <li>
+                <a href="{% url 'authors:detail_view' author.id %}">{{ author }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a href="{% url 'authors:create_view' %}">Create new author</a>
+
+{% endblock %}

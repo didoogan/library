@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <title>{% block title %} library {% endblock %}</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-static-top">
+            <ul class="nav nav-pills">
+                <li class="{%  block nav_class_books %}{% endblock %}">
+                <a href="{% url 'books:list_view' %}">Books </a></li>
+                <li class="{%  block nav_class_authors %}{% endblock%}">
+                <a href="{% url 'authors:list_view' %}">Authors </a></li>
+            </ul>
+        </nav>
+
+        {%  block content %}
+
+        {%  endblock content %}
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

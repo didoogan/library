@@ -1,0 +1,17 @@
+{%  extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Delete book {% endblock %}
+
+{% block content %}
+
+    {% for author in  book.author.all %}
+        <b>{{ book.title }}</b> was writen by <b>{{ author }}</b>
+    {% endfor %}
+
+    <br>
+    <a href="{% url 'books:update_view' book.id %}">Edit this book</a><br>
+    <a href="{% url 'books:delete_view' book.id %}">Delete this book</a><br>
+
+{% endblock %}

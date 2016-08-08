@@ -1,0 +1,21 @@
+{%  extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Books {% endblock %}
+
+{%  block nav_class_books %}{% endblock %}
+
+{% block content %}
+
+    <ul>
+    {% for book in object_list %}
+        <li>
+            <a href="{% url 'books:detail_view' book.id %}" >{{ book }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'books:create_view' %}">Create new book</a>
+
+{% endblock %}
