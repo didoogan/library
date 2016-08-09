@@ -4,6 +4,8 @@
 
 {% block title %} Delete book {% endblock %}
 
+{%  block nav_class_books %}active{% endblock %}
+
 {% block content %}
 
     {% for author in  book.author.all %}
