@@ -13,7 +13,7 @@
     {% endfor %}
 
     <br>
-    <a href="{% url 'books:update_view' book.id %}">Edit this book</a><br>
-    <a href="{% url 'books:delete_view' book.id %}">Delete this book</a><br>
+    <a class="btn btn-success btn-sm" href="{% url 'books:update_view' book.id %}">Edit this book</a><br>
+    <a class="btn btn-danger btn-sm" href="{% url 'books:delete_view' book.id %}">Delete this book</a><br>
 
 {% endblock %}

@@ -4,7 +4,7 @@
 
 {% block title %} Books {% endblock %}
 
-{%  block nav_class_books %}{% endblock %}
+{%  block nav_class_books %}active{% endblock %}
 
 {% block content %}
 
@@ -16,6 +16,6 @@
     {% endfor %}
     </ul>
 
-    <a href="{% url 'books:create_view' %}">Create new book</a>
+    <a class="btn btn-success btn-sm" href="{% url 'books:create_view' %}">Create new book</a>
 
 {% endblock %}

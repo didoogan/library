@@ -4,6 +4,8 @@
 
 {% block title %} Create author {% endblock %}
 
+{%  block nav_class_authors %}active{% endblock%}
+
 {% block content %}
 
     <p>{{ author }} has wrote :</p>
@@ -15,7 +17,7 @@
 
     </ul>
 
-    <a href="{% url 'authors:update_view' author.id %}">Update author</a><br>
-    <a href="{% url 'authors:delete_view' author.id %}">Delete author</a>
+    <a class="btn btn-success btn-sm" href="{% url 'authors:update_view' author.id %}">Update author</a><br>
+    <a class="btn btn-danger btn-sm" href="{% url 'authors:delete_view' author.id %}">Delete author</a>
 
 {% endblock %}

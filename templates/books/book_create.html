@@ -4,12 +4,14 @@
 
 {% block title %} Create book {% endblock %}
 
+{%  block nav_class_books %}active{% endblock %}
+
 {% block content %}
 
     <form method="post">
         {%  csrf_token %}
         {{  form.as_p }}
-        <input type="submit" value="Add new book" />
+        <input type="submit" class="btn btn-success btn-sm" value="Add new book" />
     </form>
 
 {% endblock %}

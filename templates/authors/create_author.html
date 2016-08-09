@@ -4,12 +4,14 @@
 
 {% block title %} Create author {% endblock %}
 
+{%  block nav_class_authors %}active{% endblock%}
+
 {% block content %}
 
     <form method="post">
         {%  csrf_token %}
         {{  form.as_p }}
-        <input type="submit" value="Add new author" />
+        <input type="submit" class="btn btn-success btn-sm" value="Add new author" />
     </form>
 
 {% endblock %}

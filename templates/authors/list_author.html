@@ -4,6 +4,8 @@
 
 {% block title %} Create author {% endblock %}
 
+{%  block nav_class_authors %}active{% endblock%}
+
 {% block content %}
 
     <ul>
@@ -15,6 +17,6 @@
     </ul>
 
     <br>
-    <a href="{% url 'authors:create_view' %}">Create new author</a>
+    <a class="btn btn-success btn-sm" href="{% url 'authors:create_view' %}">Create new author</a>
 
 {% endblock %}

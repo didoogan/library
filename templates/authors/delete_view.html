@@ -4,12 +4,14 @@
 
 {% block title %} Delete author {% endblock %}
 
+{%  block nav_class_authors %}active{% endblock%}
+
 {% block content %}
 
 <h1>Author {{ author }} will be removed, are you sure?</h1>
     <form method="post">
         {% csrf_token %}
-        <input type="submit" value="Delete" />
+        <input type="submit" class="btn btn-danger btn-sm" value="Delete" />
     </form>
 
 {% endblock %}
