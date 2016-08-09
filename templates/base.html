@@ -36,6 +36,7 @@
                   <ul class="dropdown-menu">
                       <form id="signin" action="{% url 'auth:signin' %}" method="post">
                           {% csrf_token %}
+                          <p id="message"></p>
                           <div class="form-group">
                             <label for="login">Login:</label>
                             <input type="text" class="form-control signin_login" id="login" name="login">
@@ -52,6 +53,8 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
+        <p>Response: {{ json }}</p>
+
 
         {%  block content %}
 

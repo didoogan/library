@@ -16,6 +16,8 @@ function create_post(data) {
         // success
         success: function(json) {
             $('.signin_login').val('');
+            $('.signin_password').val('');
+            $('#message').html(json.message);
             console.log(json);
             console.log('success');
         },
