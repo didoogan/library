@@ -8,9 +8,6 @@ $('#signin').on('submit', function(event) {
 
 function create_post(data) {
     console.log('create post is working');
-    // var value = $(".signin_login").val()
-    // console.log(value);
-    // console.log($('.signin_password').val());
     $.ajax({
         url: $("#signin").attr('action'),
         type: 'POST',
