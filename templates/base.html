@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        {% load staticfiles %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'css/custom.css'%}">
         <title>{% block title %} library {% endblock %}</title>
     </head>
     <body>
@@ -27,14 +29,23 @@
                 <a href="{% url 'authors:list_view' %}">Authors </a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
+                <li class="{%  block nav_class_sign_up %}{% endblock %}">
+                <a href="{% url 'auth:signup' %}">Sign up</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                      <form id="signin" action="{% url 'auth:signin' %}" method="post">
+                          {% csrf_token %}
+                          <div class="form-group">
+                            <label for="login">Login:</label>
+                            <input type="text" class="form-control signin_login" id="login" name="login">
+                          </div>
+                          <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control signin_password" id="password" name="password">
+                          </div>
+                          <button type="submit" class="btn btn-success">Sign in</button>
+                      </form>
                   </ul>
                 </li>
               </ul>
@@ -48,6 +59,7 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/script.js' %}"></script>
     </body>
 
 </html>
