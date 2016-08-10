@@ -1,6 +1,5 @@
 $('#signin').on('submit', function(event) {
     event.preventDefault();
-    console.log('form submited');
     var data = $(this).serialize();
     create_post(data);
 
@@ -15,9 +14,11 @@ function create_post(data) {
 
         // success
         success: function(resp) {
-            // $('.signin_login').val('');
-            // $('.signin_password').val('');
-            $('#message').html(resp.message);
+            var mes = $('#message');
+            if(resp.message) {
+                mes.html(resp.message);
+                mes.removeClass('hidden');
+            }
             if(resp.success) {
                 location.reload();
             }

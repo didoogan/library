@@ -38,11 +38,11 @@
                 {% else %}
                     <li class="{%  block nav_class_signup %}{% endblock %}"><a href="{% url 'auth:signup' %}">Signup</a></li>
                     <li class="dropdown" id="menuLogin">
-                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Sign in</a>
                     <div class="dropdown-menu" style="padding:17px;">
                       <form id="signin" action="{% url 'auth:signin' %}" method="post">
                           {% csrf_token %}
-                          <p id="message"></p>
+                            <p id="message" class="has-error alert alert-warning hidden"></p>
                           <div class="form-group">
                             <label for="login">Login:</label>
                             <input type="text" class="form-control signin_login" id="login" name="login">

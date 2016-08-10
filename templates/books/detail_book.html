@@ -9,11 +9,13 @@
 {% block content %}
 
     {% for author in  book.author.all %}
-        <b>{{ book.title }}</b> was writen by <b>{{ author }}</b>
+        <h3><b>{{ book.title }}</b> was writen by <b>{{ author }}</b></h3>
     {% endfor %}
 
     <br>
-    <a class="btn btn-success btn-sm" href="{% url 'books:update_view' book.id %}">Edit this book</a><br>
-    <a class="btn btn-danger btn-sm" href="{% url 'books:delete_view' book.id %}">Delete this book</a><br>
+    <span class="for-two-btn">
+        <a class="float-left btn btn-success btn-sm" href="{% url 'books:update_view' book.id %}">Edit this book</a><br>
+        <a class="float-right btn btn-danger btn-sm" href="{% url 'books:delete_view' book.id %}">Delete this book</a><br>
+    </span>
 
 {% endblock %}

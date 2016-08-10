@@ -17,6 +17,12 @@ class BookCreateView(CreateView):
     template_name = 'books/book_create.html'
     fields = ['author', 'title']
 
+    def get_form(self, form_class=None):
+        form = super(BookCreateView, self).get_form(form_class)
+        for field in form.fields:
+            form.fields[field].widget.attrs.update({'class': 'form-control'})
+        return form
+
 
 class BookDetailView(DetailView):
     model = Book
@@ -29,10 +35,19 @@ class BookUpdateView(UpdateView):
     fields = ['author', 'title']
     template_name = 'books/update_book.html'
 
+    def get_form(self, form_class=None):
+        form = super(BookUpdateView, self).get_form(form_class)
+        for field in form.fields:
+            form.fields[field].widget.attrs.update({'class': 'form-control'})
+        return form
+
 
 class BookDeleteView(DeleteView):
     model = Book
     success_url = reverse_lazy('books:list_view')
     template_name = 'books/delete_book.html'
+
+
+
 
 
