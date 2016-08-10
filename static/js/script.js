@@ -20,6 +20,9 @@ function create_post(data) {
             $('#message').html(json.message);
             console.log(json);
             console.log('success');
+            if(json.message === 'true') {
+                location.reload();
+            }
         },
 
         // error

@@ -28,32 +28,41 @@
                 <li class="{%  block nav_class_authors %}{% endblock%}">
                 <a href="{% url 'authors:list_view' %}">Authors </a></li>
               </ul>
+
               <ul class="nav navbar-nav navbar-right">
-                <li class="{%  block nav_class_sign_up %}{% endblock %}">
-                <a href="{% url 'auth:signup' %}">Sign up</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                      <form id="signin" action="{% url 'auth:signin' %}" method="post">
-                          {% csrf_token %}
-                          <p id="message"></p>
-                          <div class="form-group">
-                            <label for="login">Login:</label>
-                            <input type="text" class="form-control signin_login" id="login" name="login">
-                          </div>
-                          <div class="form-group">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control signin_password" id="password" name="password">
-                          </div>
-                          <button type="submit" class="btn btn-success">Sign in</button>
-                      </form>
+
+                {% if user.is_authenticated %}
+                    <li><a href="">{{ user.username }}</a></li>
+                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                {% else %}
+
+                    <li class="{%  block nav_class_sign_up %}{% endblock %}">
+                    <a href="{% url 'auth:signup' %}">Sign up</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign in <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                          <form id="signin" action="{% url 'auth:signin' %}" method="post">
+                              {% csrf_token %}
+                              <p id="message"></p>
+                              <div class="form-group">
+                                <label for="login">Login:</label>
+                                <input type="text" class="form-control signin_login" id="login" name="login">
+                              </div>
+                              <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" class="form-control signin_password" id="password" name="password">
+                              </div>
+                              <button type="submit" class="btn btn-success">Sign in</button>
+                          </form>
+                      </ul>
+                    </li>
                   </ul>
-                </li>
-              </ul>
+
+                {% endif %}
+
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
-        <p>Response: {{ json }}</p>
 
 
         {%  block content %}
