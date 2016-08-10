@@ -13,10 +13,10 @@
     {% endfor %}
 
     <br>
-    	<div class="col-sm-2">
+    	<div class="col-sm-1">
         	<a class="btn btn-success btn-md" href="{% url 'books:update_view' book.id %}">Edit this book</a><br>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-1 col-sm-offset-1">
         	<a class="btn btn-danger btn-md" href="{% url 'books:delete_view' book.id %}">Delete this book</a><br>
         </div>
 
