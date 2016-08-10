@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
@@ -6,26 +7,27 @@ from django.contrib.auth import authenticate, login, logout
 
 def signin(request):
     if request.method == 'POST':
-        json = {}
+        resp = {}
         username = request.POST.get('login')
         password = request.POST.get('password')
-        json['login'] = username
-        json['password'] = password
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
-                json['message'] = 'true'
+                resp['success'] = True
                 login(request, user)
             else:
-                json['message'] = 'The password is valid, but the account has been disabled'
+                resp['message'] = 'The password is valid, but the account has been disabled'
         else:
-            json['message'] = 'user and pwd are incorrect'
-        return JsonResponse(json)
+            resp['message'] = 'user and password are incorrect'
+        return JsonResponse(resp)
     else:
         return render(request, 'auth/signup.html')
 
 
 def signup(request):
+    if request.user.is_authenticated():
+        return redirect('books:list_view')
+
     if request.method == 'POST':
         username = request.POST.get('login')
         password = request.POST.get('password')
