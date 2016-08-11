@@ -26,9 +26,23 @@ class AuthorCreateView(CreateView):
     template_name = 'authors/create_author.html'
 
     def form_valid(self, form):
-        message = super(AuthorCreateView, self).form_valid(form)
-        messages .success(self.request, u'Author has been successfully created')
-        return message
+        application = form.save()
+        message = u'\"%s\" has been successfully created' % application
+        messages.success(self.request, message)
+        return super(AuthorCreateView, self).form_valid(form)
+
+
+class AuthorUpdateView(UpdateView):
+    model = Author
+    form_class = AuthorForm
+    success_url = reverse_lazy('authors:list_view')
+    template_name = 'authors/update_view.html'
+
+    def form_valid(self, form):
+        application = form.save()
+        message = u'\"%s\" has been successfully changed' % application
+        messages.success(self.request, message)
+        return super(AuthorUpdateView, self).form_valid(form)
 
 
 class AuthorDeleteView(DeleteView):
@@ -39,17 +53,7 @@ class AuthorDeleteView(DeleteView):
     success_message = u'Author has been successfully deleted'
 
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, self.success_message)
+        author = self.get_object()
+        message = u'\"%s\" has been successfully deleted' % author
+        messages.success(self.request, message)
         return super(AuthorDeleteView, self).delete(request, *args, **kwargs)
-
-
-class AuthorUpdateView(UpdateView):
-    model = Author
-    form_class = AuthorForm
-    success_url = reverse_lazy('authors:list_view')
-    template_name = 'authors/update_view.html'
-
-    def form_valid(self, form):
-        message = super(AuthorUpdateView, self).form_valid(form)
-        messages .success(self.request, u'Author has been successfully edited')
-        return message

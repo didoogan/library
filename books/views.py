@@ -26,9 +26,10 @@ class BookCreateView(CreateView):
         return form
 
     def form_valid(self, form):
-        message = super(BookCreateView, self).form_valid(form)
-        messages .success(self.request, u'Book has been successfully created')
-        return message
+        application = form.save()
+        message = u'\"%s\" has been successfully created' % application.title
+        messages.success(self.request, message)
+        return super(BookCreateView, self).form_valid(form)
 
 
 class BookDetailView(DetailView):
@@ -49,19 +50,21 @@ class BookUpdateView(UpdateView):
         return form
 
     def form_valid(self, form):
-        message = super(BookUpdateView, self).form_valid(form)
-        messages .success(self.request, u'Book has been successfully edited')
-        return message
+        book = form.save()
+        message = u'\"%s\" has been successfully changed' % book.title
+        messages.success(self.request, message)
+        return super(BookUpdateView, self).form_valid(form)
 
 
 class BookDeleteView(DeleteView):
     model = Book
     success_url = reverse_lazy('books:list_view')
     template_name = 'books/delete_book.html'
-    success_message = u'Book has been successfully deleted'
 
     def delete(self, request, *args, **kwargs):
-        messages.success(self.request, self.success_message)
+        book = self.get_object()
+        message = u'\"%s\" has been successfully deleted' % book.title
+        messages.success(self.request, message)
         return super(BookDeleteView, self).delete(request, *args, **kwargs)
 
 
