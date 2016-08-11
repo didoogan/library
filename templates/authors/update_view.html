@@ -9,9 +9,10 @@
 {% block content %}
 
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" class="btn btn-success btn-sm" value="Update" />
+        {%  csrf_token %}
+        <div class="form-group">
+          {% include 'includes/form_fields.html' with button='Edit author' %}
+        </div>
      </form>
 
 {% endblock %}

@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
 from books.models import Author
+from .forms import AuthorForm
 
 
 class AuthorListView(ListView):
@@ -18,8 +19,9 @@ class AuthorDetailView(DetailView):
 
 class AuthorCreateView(CreateView):
     model = Author
+    form_class = AuthorForm
     success_url = reverse_lazy('authors:list_view')
-    fields = ['first_name', 'last_name']
+    # fields = ['first_name', 'last_name']
     template_name = 'authors/create_author.html'
 
 
@@ -31,6 +33,6 @@ class AuthorDeleteView(DeleteView):
 
 class AuthorUpdateView(UpdateView):
     model = Author
-    fields = ['first_name', 'last_name']
+    form_class = AuthorForm
     success_url = reverse_lazy('authors:list_view')
     template_name = 'authors/update_view.html'

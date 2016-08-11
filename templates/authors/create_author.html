@@ -10,8 +10,9 @@
 
     <form method="post">
         {%  csrf_token %}
-        {{  form.as_p }}
-        <input type="submit" class="btn btn-success btn-sm" value="Add new author" />
+        <div class="form-group">
+          {% include 'includes/form_fields.html' with button='Add new author' %}
+        </div>
     </form>
 
 {% endblock %}

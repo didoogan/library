@@ -8,16 +8,26 @@
 
 {% block content %}
 
-    <p>{{ author }} has wrote :</p>
-    <ul>
+    <h3 align="center">{{ author }} has wrote :</h3>
+    <div class="container">
+        <table class="table">
+            {% for book in author.book_set.all %}
+                <tr>
+                    <td><h4>{{ book }}</h4></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 
-    {% for book in author.book_set.all %}
-        <li> {{ book }} </li>
-    {% endfor %}
+    <p>
+        <a href="{% url 'authors:update_view' author.id %}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit"></span> Edit author
+        </a>
+    </p>
 
-    </ul>
-
-    <a class="btn btn-success btn-sm" href="{% url 'authors:update_view' author.id %}">Update author</a><br>
-    <a class="btn btn-danger btn-sm" href="{% url 'authors:delete_view' author.id %}">Delete author</a>
-
+    <p>
+        <a href="{% url 'authors:delete_view' author.id %}" class="btn btn-warning" >
+            <span class="glyphicon glyphicon-minus"></span> Delete author
+        </a>
+    </p>
 {% endblock %}

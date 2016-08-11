@@ -8,10 +8,10 @@
 
 {% block content %}
 
-    <h3>Book {{ book }} will be removed, are you sure?</h3>
+    <h3 align="center">Book {{ book }} will be removed, are you sure?</h3>
         <form method="post">
             {% csrf_token %}
-            <input type="submit" class="btn btn-danger btn-lg" value="Delete" />
+            <input type="submit" class="btn btn-danger btn-sm col-xs-offset-5 col-xs-2" value="Delete" />
         </form>
 
 {% endblock %}

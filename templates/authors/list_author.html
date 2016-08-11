@@ -8,15 +8,19 @@
 
 {% block content %}
 
-    <ul>
-        {% for author in object_list %}
-            <li>
-                <a href="{% url 'authors:detail_view' author.id %}">{{ author }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <h2>Authors :</h2>
 
-    <br>
-    <a class="btn btn-success btn-sm" href="{% url 'authors:create_view' %}">Create new author</a>
+    <div class="container">
+        <table class="table">
+            {% for author in object_list %}
+                <tr>
+                    <td><a href="{% url 'authors:detail_view' author.id %}"><h4>{{ author }}</h4></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <p><a href="{% url 'authors:create_view' %}" class="btn btn-success btn-lg" >
+    <span class="glyphicon glyphicon-plus"></span> Add new author</a></p>
 
 {% endblock %}

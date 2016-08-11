@@ -8,16 +8,25 @@
 
 {% block content %}
 
-    {% for author in  book.author.all %}
-        <h3><b>{{ book.title }}</b> was wrote by <b>{{ author }}</b></h3>
-    {% endfor %}
-
-    <br>
-    	<div class="col-sm-1">
-        	<a class="btn btn-success btn-md" href="{% url 'books:update_view' book.id %}">Edit this book</a><br>
-        </div>
-        <div class="col-sm-1 col-sm-offset-1">
-        	<a class="btn btn-danger btn-md" href="{% url 'books:delete_view' book.id %}">Delete this book</a><br>
-        </div>
+    <h3 align="center"><b>{{ book.title }}</b> has been written by :</h3>
+    <div class="container">
+        <table class="table">
+            {% for author in book.author.all %}
+                <tr>
+                    <td><h4>{{ author }}</h4></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <p>
+        <a href="{% url 'books:update_view' book.id %}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-edit"></span> Edit book
+        </a>
+    </p>
+    <p>
+        <a href="{% url 'books:delete_view' book.id %}" class="btn btn-warning" >
+            <span class="glyphicon glyphicon-minus"></span> Delete book
+        </a>
+    </p>
 
 {% endblock %}
