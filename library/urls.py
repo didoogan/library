@@ -7,5 +7,6 @@ urlpatterns = [
     url(r'^books/', include('books.urls', namespace='books')),
     url(r'^authors/', include('authors.urls', namespace='authors')),
     url(r'^auth/', include('auth.urls', namespace='auth')),
+    url(r'^card/', include('card.urls', namespace='card')),
 ]
 

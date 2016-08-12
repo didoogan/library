@@ -24,6 +24,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
+                <li class="{%  block nav_class_card %}{% endblock %}">
+                <a href="{% url 'card:list_view' %}">Card</a></li>
                 <li class="{%  block nav_class_books %}{% endblock %}">
                 <a href="{% url 'books:list_view' %}">Books</a></li>
                 <li class="{%  block nav_class_authors %}{% endblock%}">

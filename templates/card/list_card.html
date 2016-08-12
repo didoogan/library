@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Card {% endblock %}
+
+{%  block nav_class_card %}active{% endblock %}
+
+{% block content %}
+
+    <h2><b>{{ object_list.0.users.username}}</b> card :</h2>
+
+    <div class="container">
+        <table class="table">
+            {% for card in object_list %}
+                {% if not card.books.is_taken %}
+                <tr>
+                    <td>{{ card.books }} {{ card.books.is_taken }} </td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+    <p><a href="{% url 'card:create_view' %}" class="btn btn-success btn-lg" >
+    <span class="glyphicon glyphicon-plus"></span> Add new books</a></p>
+
+{% endblock %}
