@@ -13,11 +13,9 @@
     <div class="container">
         <table class="table">
             {% for card in object_list %}
-                {% if not card.books.is_taken %}
                 <tr>
-                    <td>{{ card.books }} {{ card.books.is_taken }} </td>
+                    <td>{{ card.books }}</td>
                 </tr>
-                {% endif %}
             {% endfor %}
         </table>
     </div>
