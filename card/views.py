@@ -55,7 +55,8 @@ class CardCreateView(LoginRequiredMixin, FormView):
             book.save()
             card = Card(books=book, users=user)
             card.save()
-
+            message = u'You take \"%s\" from library' % book.title
+            messages.success(self.request, message)
         return super(CardCreateView, self).form_valid(form)
 
 
@@ -81,7 +82,8 @@ class CardDeleteView(LoginRequiredMixin, FormView):
             card = Card.objects.get(books=book, users=user, when_return__isnull=True)
             card.when_return = now
             card.save()
-
+            message = u'You return \"%s\" to library' % book.title
+            messages.success(self.request, message)
         return super(CardDeleteView, self).form_valid(form)
 
 

@@ -33,7 +33,7 @@ def signup(request):
         user = User.objects.create_user(username, password=password)
         user.save()
         login(request, user)
-        return redirect('books:list_view')
+        return redirect('card: list_view')
     else:
         return render(request, 'auth/signup.html')
 
