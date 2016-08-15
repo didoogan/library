@@ -1,0 +1,17 @@
+{%  extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Create card {% endblock %}
+
+{%  block nav_class_card %}active{% endblock %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          {% include 'includes/form_fields.html' with button='Return books' %}
+        </div>
+
+{% endblock %}

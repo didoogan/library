@@ -1,3 +1,5 @@
+import datetime
+
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
@@ -35,10 +37,10 @@ class CardCreateView(LoginRequiredMixin, FormView):
     template_name = 'card/create_card.html'
     success_url = '/card/'
 
-    # def __init__(self, **kwargs):
-    #     super(CardCreateView, self).__init__()
-    #     print 'Jahoo'
-
+    def get_form(self, form_class=CardForm):
+        form = super(CardCreateView, self).get_form(self.form_class)
+        form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
+        return form
 
     def form_valid(self, form):
         user = self.request.user
@@ -51,21 +53,32 @@ class CardCreateView(LoginRequiredMixin, FormView):
 
         return super(CardCreateView, self).form_valid(form)
 
-    # def get_form_kwargs(self):
-    #     kwargs = super(CardCreateView, self).get_form_kwargs()
-    #     kwargs.update({
-    #         'books': Book.objects.filter(is_taken=False)
-    #     })
-    #     return kwargs
 
-    # def get_form_kwargs(self):
-    #     kwargs = super(CardCreateView, self).get_form_kwargs()
-    #     kwargs['books'] = Book.objects.filter(is_taken=False)
-    #     return kwargs
+class CardDeleteView(LoginRequiredMixin, FormView):
+    login_url = '/auth/signup/'
+    redirect_field_name = ''
+    form_class = CardForm
+    template_name = 'card/delete_card.html'
+    success_url = '/card/'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(CardCreateView, self).get_context_data()
-    #     context['books'] = Book.objects.filter(is_taken=False)
-    #     return context
+    def get_form(self, form_class=CardForm):
+        form = super(CardDeleteView, self).get_form(self.form_class)
+        form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=True)]
+        return form
+
+    def form_valid(self, form):
+        user = self.request.user
+        now = datetime.datetime.now()
+        for item in form.cleaned_data['books']:
+            book = Book.objects.get(id=item)
+            book.is_taken = False
+            book.save()
+            card = Card(books=book, users=user)
+            card.when_return = now
+            card.save()
+
+        return super(CardDeleteView, self).form_valid(form)
+
+
 
 
