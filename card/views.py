@@ -28,23 +28,27 @@ class CardListView(LoginRequiredMixin, ListView):
         return card
 
 
-class CardCreateView(LoginRequiredMixin, CreateView):
+class CardCreateView(LoginRequiredMixin, FormView):
     login_url = '/auth/signup/'
     redirect_field_name = ''
-    model = Card
-    class_form = CardForm
-    fields = ['books']
+    form_class = CardForm
     template_name = 'card/create_card.html'
     success_url = '/card/'
 
+    # def __init__(self, **kwargs):
+    #     super(CardCreateView, self).__init__()
+    #     print 'Jahoo'
+
+
     def form_valid(self, form):
-        card = form.save(commit=False)
-        card.users = self.request.user
-        card.save()
-        # card.books.is_taken
-        book = card.books
-        book.is_taken = True
-        book.save()
+        user = self.request.user
+        for item in form.cleaned_data['books']:
+            book = Book.objects.get(id=item)
+            book.is_taken = True
+            book.save()
+            card = Card(books=book, users=user)
+            card.save()
+
         return super(CardCreateView, self).form_valid(form)
 
     # def get_form_kwargs(self):
