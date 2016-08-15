@@ -18,10 +18,8 @@ from books.models import Book
 
 
 class CardForm(forms.Form):
-    books = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                      choices=[(o.id, o.title) for o in Book.objects.filter(is_taken=False)])
+    books = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
 
-    # def __init__(self, *args, **kwargs):
-    #     self.books = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-    #                                       choices=[(o.id, o.title) for o in Book.objects.filter(is_taken=False)])
-    #     super(CardForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(CardForm, self).__init__(*args, **kwargs)
+        self.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
