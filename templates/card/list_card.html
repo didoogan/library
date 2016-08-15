@@ -14,7 +14,9 @@
         <table class="table">
             {% for card in object_list %}
                 <tr>
-                    <td>{{ card.books }}</td>
+                    {% if  not card.when_return %}
+                        <td>{{ card.books }}</td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>

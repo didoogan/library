@@ -24,6 +24,11 @@ class CardListView(LoginRequiredMixin, ListView):
     model = Card
     template_name = 'card/list_card.html'
 
+    # def get_form(self, form_class=None):
+    #     form = super(CardListView, self).get_form(self, form_class)
+    #     form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
+    #     return form
+
     def get_queryset(self):
         user = self.request.user
         card = Card.objects.filter(users=user)
@@ -73,7 +78,7 @@ class CardDeleteView(LoginRequiredMixin, FormView):
             book = Book.objects.get(id=item)
             book.is_taken = False
             book.save()
-            card = Card(books=book, users=user)
+            card = Card.objects.get(books=book, users=user, when_return__isnull=True)
             card.when_return = now
             card.save()
 
