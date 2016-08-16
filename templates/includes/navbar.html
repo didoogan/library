@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Library</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="{%  block nav_class_card %}{% endblock %}">
+                <a href="{% url 'card:list_view' %}">Card</a></li>
+                <li class="{%  block nav_class_books %}{% endblock %}">
+                <a href="{% url 'books:list_view' %}">Books</a></li>
+                <li class="{%  block nav_class_authors %}{% endblock%}">
+                <a href="{% url 'authors:list_view' %}">Authors </a></li>
+              </ul>
+
+              {% block search_bar %}{% endblock %}
+
+              <ul class="nav navbar-nav navbar-right">
+
+                {% if user.is_authenticated %}
+                    <li><a href=""><b>{{ user.username }}</b></a></li>
+                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="{%  block nav_class_signup %}{% endblock %}"><a href="{% url 'auth:signup' %}">Signup</a></li>
+                    <li class="dropdown" id="menuLogin">
+                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Sign in</a>
+                    <div class="dropdown-menu" style="padding:17px;">
+                      <form id="signin" action="{% url 'auth:signin' %}" method="post">
+                          {% csrf_token %}
+                            <p id="message" class="has-error alert alert-warning hidden"></p>
+                          <div class="form-group">
+                            <label for="login">Login:</label>
+                            <input type="text" class="form-control signin_login" id="login" name="login">
+                          </div>
+                          <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" class="form-control signin_password" id="password" name="password">
+                          </div>
+                          <button type="submit" class="btn btn-success">Sign in</button>
+                      </form>
+                    </div>
+                    </li>
+                </ul>
+
+                {% endif %}
+
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>

@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.urlresolvers import reverse_lazy
+from django.db.models import Q
 
 from .forms import CardForm
 
@@ -44,7 +45,20 @@ class CardCreateView(LoginRequiredMixin, FormView):
 
     def get_form(self, form_class=CardForm):
         form = super(CardCreateView, self).get_form(self.form_class)
-        form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
+        if 'search_book' in self.request.POST:
+            # form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
+            data = self.request.POST.get('search_value', None)
+            form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(
+                # Q(is_taken=False), Q(author__first_name__icontains=data) |
+                # Q(is_taken=False), Q(author__last_name__icontains=data) |
+                # Q(is_taken=False), Q(author__book__title__icontains=data)
+                (Q(author__first_name__icontains=data) |
+                 Q(author__last_name__icontains=data) |
+                 Q(title__icontains=data)) & Q(is_taken=False)
+            ).distinct()]
+
+        else:
+            form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
         return form
 
     def form_valid(self, form):

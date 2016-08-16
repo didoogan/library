@@ -7,12 +7,13 @@
 {%  block nav_class_card %}active{% endblock %}
 
 {% block search_bar %}
-    
-      <form class="navbar-form navbar-left">
+
+      <form class="navbar-form navbar-left" method="post" action="{% url 'card:create_view' %}">
+        {% csrf_token %}
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" name="search_value">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" name="search_book">Submit</button>
       </form>
 
 {% endblock %}

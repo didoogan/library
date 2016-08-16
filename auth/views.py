@@ -25,7 +25,7 @@ def signin(request):
 
 def signup(request):
     if request.user.is_authenticated():
-        # why not card: list_view ?
+        # why not url card: 'list_view' ?
         return redirect('/card/')
 
     if request.method == 'POST':
