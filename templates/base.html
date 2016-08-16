@@ -32,6 +32,8 @@
                 <a href="{% url 'authors:list_view' %}">Authors </a></li>
               </ul>
 
+              {% block search_bar %}{% endblock %}
+
               <ul class="nav navbar-nav navbar-right">
 
                 {% if user.is_authenticated %}

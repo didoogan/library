@@ -25,7 +25,8 @@ def signin(request):
 
 def signup(request):
     if request.user.is_authenticated():
-        return redirect('books:list_view')
+        # why not card: list_view ?
+        return redirect('/card/')
 
     if request.method == 'POST':
         username = request.POST.get('login')
