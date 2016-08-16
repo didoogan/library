@@ -48,15 +48,18 @@ class CardCreateView(LoginRequiredMixin, FormView):
         if 'search_book' in self.request.POST:
             # form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
             data = self.request.POST.get('search_value', None)
-            form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(
+            form.fields['books'].choices = ((o.id, o.title) for o in Book.objects.filter(
                 # Q(is_taken=False), Q(author__first_name__icontains=data) |
                 # Q(is_taken=False), Q(author__last_name__icontains=data) |
                 # Q(is_taken=False), Q(author__book__title__icontains=data)
                 (Q(author__first_name__icontains=data) |
                  Q(author__last_name__icontains=data) |
+                 # this should work, but don't
+                 (Q(author__first_name__icontains=data) & Q(author__last_name__icontains=data)) |
                  Q(title__icontains=data)) & Q(is_taken=False)
-            ).distinct()]
-
+            ).distinct())
+            # raise error, how fix
+            # form['books'].errors = ''
         else:
             form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
         return form
@@ -73,6 +76,10 @@ class CardCreateView(LoginRequiredMixin, FormView):
             message = u'You take \"%s\" from library' % book.title
             messages.success(self.request, message)
         return super(CardCreateView, self).form_valid(form)
+
+    # def form_invalid(self, form):
+    #     form['books'].errors = ''
+        # return super(CardCreateView, self).form_invalid(form)
 
 
 class CardDeleteView(LoginRequiredMixin, FormView):
