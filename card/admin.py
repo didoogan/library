@@ -2,4 +2,8 @@ from django.contrib import admin
 
 from .models import Card
 
-admin.site.register(Card)
+
+class CardAdmin(admin.ModelAdmin):
+    fields = ('users', 'books', 'when_giving', 'when_return')
+
+admin.site.register(Card, CardAdmin)

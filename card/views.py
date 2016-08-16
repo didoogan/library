@@ -63,11 +63,12 @@ class CardCreateView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = self.request.user
+        now = datetime.datetime.now()
         for item in form.cleaned_data['books']:
             book = Book.objects.get(id=item)
             book.is_taken = True
             book.save()
-            card = Card(books=book, users=user)
+            card = Card(books=book, users=user, when_giving=now)
             card.save()
             message = u'You take \"%s\" from library' % book.title
             messages.success(self.request, message)
