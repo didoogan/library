@@ -19,7 +19,7 @@ from card.models import Card
 
 
 class CardListView(LoginRequiredMixin, ListView):
-    login_url = '/auth/signup/'
+    login_url = '/users/signup/'
     redirect_field_name = ''
 
     model = Card
@@ -37,7 +37,7 @@ class CardListView(LoginRequiredMixin, ListView):
 
 
 class CardCreateView(LoginRequiredMixin, FormView):
-    login_url = '/auth/signup/'
+    login_url = '/users/signup/'
     redirect_field_name = ''
     form_class = CardForm
     template_name = 'card/create_card.html'
@@ -81,7 +81,7 @@ class CardCreateView(LoginRequiredMixin, FormView):
 
 
 class CardDeleteView(LoginRequiredMixin, FormView):
-    login_url = '/auth/signup/'
+    login_url = '/users/signup/'
     redirect_field_name = ''
     form_class = CardForm
     template_name = 'card/delete_card.html'
