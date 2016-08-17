@@ -13,7 +13,7 @@
         <table class="table">
             {% for book in author.book_set.all %}
                 <tr>
-                    <td><h4>{{ book }}</h4></td>
+                    <td><a href="{% url 'books:detail_view' book.id %}"> <h4>{{ book }}</h4></a></td>
                 </tr>
             {% endfor %}
         </table>
