@@ -11,6 +11,9 @@
     <h2><b>{{ object_list.0.users.username}}</b> card :</h2>
 
     <div class="container">
+        {% if  object_list  %}
+            <p>Fuck you</p>
+        {% endif %}
         <table class="table">
             {% for card in object_list %}
                 <tr>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from .models import MyUser
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -32,7 +33,7 @@ def signup(request):
         username = request.POST.get('login')
         password = request.POST.get('password')
         user = User.objects.create_user(username, password=password)
-        user.save()
+        MyUser.objects.create(user=user)
         login(request, user)
         return redirect('card:list_view')
     else:
