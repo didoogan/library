@@ -20,6 +20,6 @@ class Migration(migrations.Migration):
         migrations.RenameField(
             model_name='card',
             old_name='user',
-            new_name='users',
+            new_name='custom_users',
         ),
     ]

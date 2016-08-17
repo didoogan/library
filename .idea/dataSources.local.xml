@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="PostgreSQL - library@localhost" uuid="eca9f4e8-3730-4577-be8d-f7dd8d5dda73" />
+    <data-source name="PostgreSQL - library@localhost" uuid="eca9f4e8-3730-4577-be8d-f7dd8d5dda73">
+      <user-name>doogan</user-name>
+      <user-password>dfcedfc5dfc5dfcddfcbdfc4</user-password>
+    </data-source>
   </component>
 </project>

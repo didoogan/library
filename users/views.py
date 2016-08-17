@@ -20,7 +20,7 @@ def signin(request):
             resp['message'] = 'user and password are incorrect'
         return JsonResponse(resp)
     else:
-        return render(request, 'auth/signup.html')
+        return render(request, 'users/signup.html')
 
 
 def signup(request):
@@ -36,7 +36,7 @@ def signup(request):
         login(request, user)
         return redirect('card: list_view')
     else:
-        return render(request, 'auth/signup.html')
+        return render(request, 'users/signup.html')
 
 
 def logout_user(request):

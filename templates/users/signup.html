@@ -9,7 +9,7 @@
 {% block content %}
 
     <h2>Please, feel free to sign up on this beautiful library </h2>
-    <form class="form-horizontal" id="signup" role="form" action="{% url 'auth:signup' %}" method="post">
+    <form class="form-horizontal" id="signup" role="form" action="{% url 'users:signup' %}" method="post">
       {% csrf_token %}
       <div class="form-group">
         <label class="control-label col-sm-2" for="login">Login :</label>
