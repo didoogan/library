@@ -8,24 +8,19 @@
 
 {% block content %}
 
-    <h2><b>{{ object_list.0.users.username}}</b> card :</h2>
+    <h2><b>{{ user.username }}</b> card :</h2>
 
     <div class="container">
         <table class="table">
-        {% if object_list|length > 20 %}
             {% for card in object_list %}
                 <tr>
-                    {% if  not card.when_return %}
-                        <td>{{ card.books }}</td>
-
-                    {% endif %}
+{#                    {% if  not card.when_return %}#}
+                        <td><a href="{% url 'books:detail_view' card.books_id%}"><h4>{{ card.books }}</h4></a></td>
+{#                    {% endif %}#}
                 </tr>
-{#            {% empty %}#}
-{#                <h4>You  haven't any book</h4>#}
+            {% empty %}
+                <h4><p align="center">You should begin to read </p></h4>
             {% endfor %}
-        {% else %}
-            <h4>You  haven't any book</h4>
-        {% endif %}
         </table>
     </div>
 

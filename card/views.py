@@ -32,7 +32,12 @@ class CardListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = self.request.user
-        card = Card.objects.filter(users=user)
+        # card = Card.objects.filter(users=user)
+        # card = Card.objects.filter(users=user, books__is_taken=False)
+        # card = Card.objects.filter(users=user).filter(books__is_taken=True, books__card__when_return=None).distinct()
+        card = Card.objects.filter(users=user, books__is_taken=True, when_return=None)
+
+
         return card
 
 
