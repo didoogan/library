@@ -14,5 +14,5 @@ class Card(models.Model):
     when_giving = models.DateField()
     when_return = models.DateField(null=True, blank=True)
 
-    # def __unicode__(self):
-    #     return self.users.get_username()
+    def __unicode__(self):
+        return self.users.get_username()
