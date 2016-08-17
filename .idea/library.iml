@@ -15,7 +15,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 2.7.12 virtualenv at ~/virtualenvs/library" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 2.7.12 virtualenv at ~/library/.env (1)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
