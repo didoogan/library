@@ -3,6 +3,10 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import MyUser
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy
+
 
 
 def signin(request):
@@ -42,4 +46,17 @@ def signup(request):
 def logout_user(request):
     logout(request)
     return redirect('users:signup')
+
+
+class UserProfile(LoginRequiredMixin, UpdateView):
+    login_url = '/users/signup/'
+    redirect_field_name = ''
+
+    model = MyUser
+    template_name = 'users/profile.html'
+    fields = ['image', 'is_librarian']
+    success_url = reverse_lazy('card:list_view')
+
+
+
 

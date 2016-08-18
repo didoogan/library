@@ -18,6 +18,8 @@
                         <li>{{ card.books }} was given :<b>{{ card.when_giving}}</b>
                             {% if card.when_return %} and returned :<b>{{ card.when_return }}</b>{% else %}the book is
                                 kept by user{% endif %}</li>
+                    {% empty %}
+                        <p>User don't read books</p>
                     {% endfor %}
                 </ul>
             {% endfor %}

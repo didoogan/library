@@ -1,0 +1,17 @@
+{%  extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block title %} Books {% endblock %}
+
+{%  block nav_class_profile %}active{% endblock %}
+
+{% block content %}
+
+    <h1>Your profile</h1>
+    <form action="">
+        {% csrf_token %}
+        {{ form }}
+    </form>
+
+{% endblock %}
