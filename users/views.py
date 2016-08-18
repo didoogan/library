@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 
-
+from .forms import ProfileForm
 
 def signin(request):
     if request.method == 'POST':
@@ -48,13 +48,9 @@ def logout_user(request):
     return redirect('users:signup')
 
 
-class UserProfile(LoginRequiredMixin, UpdateView):
-    login_url = '/users/signup/'
-    redirect_field_name = ''
-
-    model = MyUser
+class UserProfile(FormView):
+    form_class = ProfileForm
     template_name = 'users/profile.html'
-    fields = ['image', 'is_librarian']
     success_url = reverse_lazy('card:list_view')
 
 
