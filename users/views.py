@@ -53,6 +53,15 @@ class UserProfile(FormView):
     template_name = 'users/profile.html'
     success_url = reverse_lazy('card:list_view')
 
+    def form_valid(self, form):
+        user = self.request.user
+        myuser = user.myuser
+        user.first_name = form.cleaned_data['first_name']
+        user.second_name = form.cleaned_data['second_name']
+        user.email = form.cleaned_data['email']
+        myuser.image = form.cleaned_data['image']
+
+
 
 
 

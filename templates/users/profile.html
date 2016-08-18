@@ -11,7 +11,9 @@
     <h1>Your profile</h1>
     <form action="">
         {% csrf_token %}
-        {{ form }}
+        <div class="form-group">
+          {% include 'includes/form_fields.html' with button='Change profile' %}
+        </div>
     </form>
 
 {% endblock %}
