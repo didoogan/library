@@ -57,9 +57,16 @@ class UserProfile(FormView):
         user = self.request.user
         myuser = user.myuser
         user.first_name = form.cleaned_data['first_name']
-        user.second_name = form.cleaned_data['second_name']
+        user.last_name = form.cleaned_data['second_name']
         user.email = form.cleaned_data['email']
+        user.save()
         myuser.image = form.cleaned_data['image']
+        myuser.save()
+        return super(UserProfile, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print 'failure'
+
 
 
 

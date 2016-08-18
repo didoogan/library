@@ -9,7 +9,7 @@
 {% block content %}
 
     <h1>Your profile</h1>
-    <form action="">
+    <form method="post">
         {% csrf_token %}
         <div class="form-group">
           {% include 'includes/form_fields.html' with button='Change profile' %}
