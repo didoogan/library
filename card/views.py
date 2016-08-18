@@ -32,12 +32,7 @@ class CardListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = self.request.user
-        # card = Card.objects.filter(users=user)
-        # card = Card.objects.filter(users=user, books__is_taken=False)
-        # card = Card.objects.filter(users=user).filter(books__is_taken=True, books__card__when_return=None).distinct()
-        card = Card.objects.filter(users=user, books__is_taken=True, when_return=None)
-
-
+        card = Card.objects.filter(myuser__user=user, books__is_taken=True, when_return__isnull=True)
         return card
 
 
@@ -61,20 +56,19 @@ class CardCreateView(LoginRequiredMixin, FormView):
                  Q(author__last_name__icontains=data) |
                  Q(title__icontains=data)) & Q(is_taken=False)
             ).distinct())
-            # raise error, how fix
-            # form['books'].errors = ''
         else:
             form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
         return form
 
     def form_valid(self, form):
         user = self.request.user
+        myuser = user.myuser
         now = datetime.datetime.now()
         for item in form.cleaned_data['books']:
             book = Book.objects.get(id=item)
             book.is_taken = True
             book.save()
-            card = Card(books=book, users=user, when_giving=now)
+            card = Card(books=book, myuser=myuser, when_giving=now)
             card.save()
             message = u'You take \"%s\" from library' % book.title
             messages.success(self.request, message)
@@ -93,18 +87,21 @@ class CardDeleteView(LoginRequiredMixin, FormView):
     success_url = '/card/'
 
     def get_form(self, form_class=CardForm):
+        user = self.request.user
+        myuser = user.myuser
         form = super(CardDeleteView, self).get_form(self.form_class)
-        form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=True)]
+        form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=True, card__myuser=myuser, card__when_return__isnull=True)]
         return form
 
     def form_valid(self, form):
         user = self.request.user
+        myuser = user.myuser
         now = datetime.datetime.now()
         for item in form.cleaned_data['books']:
             book = Book.objects.get(id=item)
             book.is_taken = False
             book.save()
-            card = Card.objects.get(books=book, users=user, when_return__isnull=True)
+            card = Card.objects.get(books=book, myuser=myuser, when_return__isnull=True)
             card.when_return = now
             card.save()
             message = u'You return \"%s\" to library' % book.title

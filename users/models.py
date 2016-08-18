@@ -9,5 +9,5 @@ class MyUser(models.Model):
     is_librarian = models.BooleanField(default=False)
     image = models.ImageField(blank=True, null=True)
 
-    # def __unicode__(self):
-    #     return self.get_username()
+    def __unicode__(self):
+        return self.user.get_username()

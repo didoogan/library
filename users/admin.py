@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from.models import MyUser
+
+
+class MyUserAdmin(admin.ModelAdmin):
+    fields = ['user', 'image']
+
+admin.site.register(MyUser, MyUserAdmin)
