@@ -10,7 +10,7 @@ from books.models import Book
 
 class Card(models.Model):
     # users = models.ForeignKey(User)
-    myuser = models.ForeignKey(MyUser)
+    myuser = models.ForeignKey(MyUser, related_name='card')
     books = models.ForeignKey(Book, null=True, blank=True, related_name='card')
     when_giving = models.DateField()
     when_return = models.DateField(null=True, blank=True)

@@ -12,7 +12,14 @@
 
     <div class="container">
             {% for myuser in object_list %}
-                <h3>{{ myuser.user.username }}</h3>
+                <h3>{{ myuser.user.username }}'s card :</h3>
+                <ul>
+                    {% for card in myuser.card.all %}
+                        <li>{{ card.books }} was given :<b>{{ card.when_giving}}</b>
+                            {% if card.when_return %} and returned :<b>{{ card.when_return }}</b>{% else %}the book is
+                                kept by user{% endif %}</li>
+                    {% endfor %}
+                </ul>
             {% endfor %}
     </div>
 

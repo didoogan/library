@@ -40,7 +40,6 @@ class CardListView(LoginRequiredMixin, ListView):
         return qs
 
 
-
 class CardCreateView(LoginRequiredMixin, FormView):
     login_url = '/users/signup/'
     redirect_field_name = ''
@@ -78,10 +77,6 @@ class CardCreateView(LoginRequiredMixin, FormView):
             message = u'You take \"%s\" from library' % book.title
             messages.success(self.request, message)
         return super(CardCreateView, self).form_valid(form)
-
-    # def form_invalid(self, form):
-    #     form['books'].errors = ''
-        # return super(CardCreateView, self).form_invalid(form)
 
 
 class CardDeleteView(LoginRequiredMixin, FormView):
