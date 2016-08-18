@@ -14,7 +14,7 @@ from .forms import CardForm
 
 
 from books.models import Book
-
+from users.models import MyUser
 from card.models import Card
 
 
@@ -32,8 +32,13 @@ class CardListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         user = self.request.user
-        card = Card.objects.filter(myuser__user=user, books__is_taken=True, when_return__isnull=True)
-        return card
+        if user.myuser.is_librarian:
+            qs = MyUser.objects.all()
+            self.template_name = 'card/lib_list_card.html'
+        else:
+            qs = Card.objects.filter(myuser__user=user, books__is_taken=True, when_return__isnull=True)
+        return qs
+
 
 
 class CardCreateView(LoginRequiredMixin, FormView):

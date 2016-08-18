@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Card {% endblock %}
+
+{%  block nav_class_card %}active{% endblock %}
+
+{% block content %}
+
+    <h2><b>{{ user.username }}</b> card :</h2>
+
+    <div class="container">
+            {% for myuser in object_list %}
+                <h3>{{ myuser.user.username }}</h3>
+            {% endfor %}
+    </div>
+
+
+{% endblock %}
