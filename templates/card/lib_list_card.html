@@ -8,22 +8,31 @@
 
 {% block content %}
 
-    <h2><b>{{ user.username }}</b> card :</h2>
+    <h2><b>Libray's users :</h2>
+
+{#    <div class="container">#}
+{#            {% for myuser in object_list %}#}
+{#                <h3>{{ myuser.user.username }}'s card :</h3>#}
+{#                <ul>#}
+{#                    {% for card in myuser.card.all %}#}
+{#                        <li>{{ card.books }} was given :<b>{{ card.when_giving}}</b>#}
+{#                            {% if card.when_return %} and returned :<b>{{ card.when_return }}</b>{% else %}the book is#}
+{#                                kept by user{% endif %}</li>#}
+{#                    {% empty %}#}
+{#                        <p>User don't read books</p>#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+{#            {% endfor %}#}
+{#    </div>#}
 
     <div class="container">
+        <table class="table">
             {% for myuser in object_list %}
-                <h3>{{ myuser.user.username }}'s card :</h3>
-                <ul>
-                    {% for card in myuser.card.all %}
-                        <li>{{ card.books }} was given :<b>{{ card.when_giving}}</b>
-                            {% if card.when_return %} and returned :<b>{{ card.when_return }}</b>{% else %}the book is
-                                kept by user{% endif %}</li>
-                    {% empty %}
-                        <p>User don't read books</p>
-                    {% endfor %}
-                </ul>
+                <tr>
+                    <td><a href="{% url 'users:profile' myuser.user.id %}">{{ myuser.user.username }}</a> </td>
+                </tr>
             {% endfor %}
+        </table>
     </div>
-
 
 {% endblock %}

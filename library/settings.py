@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third side apps
+    'widget_tweaks',
+    # my apps
     'books',
     'authors',
     'card',

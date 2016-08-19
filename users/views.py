@@ -55,7 +55,7 @@ class UserProfile(FormView):
     success_url = reverse_lazy('card:list_view')
 
     def form_valid(self, form):
-        user = self.request.user
+        user = User.objects.get(id=self.kwargs['pk'])
         myuser = user.myuser
         user.first_name = form.cleaned_data['first_name']
         user.last_name = form.cleaned_data['last_name']
@@ -81,6 +81,11 @@ class UserProfile(FormView):
         context['cards'] = cards
         return context
 
+    # def get_context_data(self, **kwargs):
+    #     users = Card.objects.all()
+    #     context = super(UserProfile, self).get_context_data(**kwargs)
+    #     context['cards'] = users
+    #     return context
 
 
 

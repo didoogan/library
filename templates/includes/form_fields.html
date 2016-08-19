@@ -1,21 +1,27 @@
+{% load widget_tweaks %}
+
 {% for field in form %}
-            <div class="row">
-            {{ field.errors }}
-            </div>
-
-            <div class="row">
-                <div class="col-sm-1">
-                    {{ field.label_tag }}
-                </div><br>
-
-                <div class="col-sm-offset-1 col-sm-5">
-                    {{ field }}
-                </div>
-            </div>
-        {% endfor %}
+    <div class="container">
+        <div class="row">
+        {{ field.errors }}
         </div>
-            <div class="row">
-            <div class="col-sm-offset-2 col-sm-5">
-                <input type="submit" class="btn-block btn btn-success btn-md " value="{{ button }}" />
+
+        <div class="row">
+            <div class="col-sm-1">
+                {{ field.label_tag }}
+            </div><br>
+
+            <div class="col-sm-offset-1 col-sm-5">
+{#                {{ field|add_class:"form-control" }}#}
+                  {{ field }}
             </div>
         </div>
+    </div>
+{% endfor %}
+
+</div>
+    <div class="row">
+    <div class="col-sm-offset-2 col-sm-5">
+        <input type="submit" class="btn-block btn btn-success btn-md " value="{{ button }}" />
+    </div>
+</div>

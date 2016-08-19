@@ -20,9 +20,27 @@
 
     <div class="container">
         <table class="table">
+                <tr>
+                    <th>BOOK</th>
+                    <th>ISSURE</th>
+                    <th>RETURN</th>
+                </tr>
             {% for card in cards %}
                 <tr>
-                    <td><a href="{% url 'books:detail_view' card.books.id %}" ><h4>{{ card.books.title }}</h4></a></td>
+                    <td>
+                        <a href="{% url 'books:detail_view' card.books.id %}">
+                            <h4>{{ card.books.title }} </h4>
+                        </a>
+                    </td>
+                    <td>
+                        {{ card.when_giving }}
+                    </td>
+                    <td>
+                        {% if card.when_return %}
+                            {{ card.when_return }}
+                        {% else %} the book is kept by user
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>
