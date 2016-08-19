@@ -8,7 +8,12 @@
 
 {% block content %}
 
-    <h1><p align="center">Your profile</p></h1>
+    <h1><p align="center"><b>{{ dude.username|upper }}</b>'S PROFILE</p></h1>
+
+    {% if user.myuser.image %}
+        <img src="{{ user.myuser.image.url  }}" >
+    {% endif %}
+
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">

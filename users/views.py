@@ -77,9 +77,11 @@ class UserProfile(FormView):
         return form
 
     def get_context_data(self, **kwargs):
-        cards = Card.objects.filter(myuser__user_id=self.kwargs['pk'])
+        id = self.kwargs['pk']
+        cards = Card.objects.filter(myuser__user_id=id)
         context = super(UserProfile, self).get_context_data(**kwargs)
         context['cards'] = cards
+        context['dude'] = User.objects.get(id=id)
         return context
 
     # def get_context_data(self, **kwargs):
