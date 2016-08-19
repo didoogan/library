@@ -8,6 +8,7 @@ from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteVi
 from django.core.urlresolvers import reverse_lazy
 
 from .forms import ProfileForm
+from card.models import Card
 
 def signin(request):
     if request.method == 'POST':
@@ -57,17 +58,28 @@ class UserProfile(FormView):
         user = self.request.user
         myuser = user.myuser
         user.first_name = form.cleaned_data['first_name']
-        user.last_name = form.cleaned_data['second_name']
+        user.last_name = form.cleaned_data['last_name']
         user.email = form.cleaned_data['email']
         user.save()
         myuser.image = form.cleaned_data['image']
         myuser.save()
         return super(UserProfile, self).form_valid(form)
 
-    def form_invalid(self, form):
-        print 'failure'
+    def get_initial(self):
+        user = User.objects.get(id=self.kwargs['pk'])
+        myuser = user.myuser
+        form = super(UserProfile, self).get_initial()
+        form['first_name'] = user.first_name
+        form['last_name'] = user.last_name
+        form['email'] = user.email
+        form['image'] = myuser.image
+        return form
 
-
+    def get_context_data(self, **kwargs):
+        cards = Card.objects.filter(myuser__user_id=self.kwargs['pk'])
+        context = super(UserProfile, self).get_context_data(**kwargs)
+        context['cards'] = cards
+        return context
 
 
 
