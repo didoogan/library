@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from .models import MyUser
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
@@ -61,6 +61,7 @@ class UserProfile(FormView):
         user.last_name = form.cleaned_data['last_name']
         user.email = form.cleaned_data['email']
         user.save()
+        myuser.image = form.cleaned_data['image']
         myuser.image = form.cleaned_data['image']
         myuser.save()
         return super(UserProfile, self).form_valid(form)
