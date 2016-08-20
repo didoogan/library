@@ -9,11 +9,11 @@
 {% block content %}
 
     <h1><p align="center"><b>{{ dude.username|upper }}</b>'S PROFILE</p></h1>
-
-    {% if user.myuser.image %}
-        <img src="{{ user.myuser.image.url  }}" >
-    {% endif %}
-
+    <div class="container" align="right">
+        {% if user.myuser.image %}
+            <img src="{{ dude.myuser.image.url  }}" height="150px">
+        {% endif %}
+    </div>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
