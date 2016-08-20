@@ -73,7 +73,7 @@ class UserProfile(FormView):
         form['first_name'] = user.first_name
         form['last_name'] = user.last_name
         form['email'] = user.email
-        form['image'] = myuser.image
+        # form['image'] = myuser.image
         return form
 
     def get_context_data(self, **kwargs):

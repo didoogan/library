@@ -20,7 +20,7 @@
           {% include 'includes/form_fields.html' with button='Change profile' %}
         </div>
     </form>
-
+    {% if dude.username != 'librarian' %}
     <h2><p align="center">History</p></h2>
 
     <div class="container">
@@ -50,6 +50,6 @@
             {% endfor %}
         </table>
     </div>
-
+    {% endif %}
 
 {% endblock %}
