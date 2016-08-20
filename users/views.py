@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.db import IntegrityError
+from django.contrib import messages
+
 
 from .forms import ProfileForm
 from card.models import Card
@@ -36,7 +39,11 @@ def signup(request):
     if request.method == 'POST':
         username = request.POST.get('login')
         password = request.POST.get('password')
-        user = User.objects.create_user(username, password=password)
+        try:
+            user = User.objects.create_user(username, password=password)
+        except IntegrityError:
+            messages.error(request, 'Such user already exists')
+            return redirect('users:signup')
         MyUser.objects.create(user=user)
         login(request, user)
         return redirect('card:list_view')
