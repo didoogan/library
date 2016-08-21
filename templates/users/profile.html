@@ -20,6 +20,8 @@
           {% include 'includes/form_fields.html' with button='Change profile' %}
         </div>
     </form>
+
+{#    librarian don't need history, so like user, who hasn't one#}
     {% if dude.username != 'librarian' and cards.first %}
     <h2><p align="center">History</p></h2>
 

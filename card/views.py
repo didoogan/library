@@ -59,6 +59,7 @@ class CardCreateView(LoginRequiredMixin, FormView):
                 # Q(is_taken=False), Q(author__book__title__icontains=data)
                 (Q(author__first_name__icontains=data) |
                  Q(author__last_name__icontains=data) |
+                 # Q(author.unicode()=data) |
                  Q(title__icontains=data)) & Q(is_taken=False)
             ).distinct())
         else:
