@@ -71,6 +71,8 @@ class UserProfile(FormView):
         myuser.image = form.cleaned_data['image']
         myuser.image = form.cleaned_data['image']
         myuser.save()
+        message = '%s has been successfully updated' % user.username
+        messages.success(self.request, message)
         return super(UserProfile, self).form_valid(form)
 
     def get_initial(self):
