@@ -20,7 +20,7 @@
           {% include 'includes/form_fields.html' with button='Change profile' %}
         </div>
     </form>
-    {% if dude.username != 'librarian' %}
+    {% if dude.username != 'librarian' and cards.first %}
     <h2><p align="center">History</p></h2>
 
     <div class="container">

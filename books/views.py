@@ -49,11 +49,11 @@ class BookUpdateView(UpdateView):
             form.fields[field].widget.attrs.update({'class': 'form-control'})
         return form
 
-    def form_valid(self, form):
-        book = form.save()
-        message = u'\"%s\" has been successfully changed' % book.title
-        messages.success(self.request, message)
-        return super(BookUpdateView, self).form_valid(form)
+    # def form_valid(self, form):
+    #     book = form.save()
+    #     message = u'\"%s\" has been successfully changed' % book.title
+    #     messages.success(self.request, message)
+    #     return super(BookUpdateView, self).form_valid(form)
 
 
 class BookDeleteView(DeleteView):
