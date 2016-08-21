@@ -17,17 +17,12 @@
                 </tr>
             {% endfor %}
         </table>
-    </div>
 
-    <p>
         <a href="{% url 'authors:update_view' author.id %}" class="btn btn-primary">
             <span class="glyphicon glyphicon-edit"></span> Edit author
         </a>
-    </p>
-
-    <p>
         <a href="{% url 'authors:delete_view' author.id %}" class="btn btn-warning" >
             <span class="glyphicon glyphicon-minus"></span> Delete author
         </a>
-    </p>
+    </div>
 {% endblock %}

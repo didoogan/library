@@ -38,9 +38,14 @@
               <ul class="nav navbar-nav navbar-right">
 
                 {% if user.is_authenticated %}
+{#                    <li>#}
+{#                        {% if user.myuser.image %}#}
+{#                            <a  href="{% url 'users:profile' user.id%}"><img src="{{ user.myuser.image.url  }}" height="25px"></a>#}
+{#                        {% endif %}#}
+{#                    </li>#}
                     <li class="{% block nav_class_profile %}{% endblock %}">
                         <a href="{% url 'users:profile' user.id%}"><b>{{ user.username }}</b></a></li>
-                    <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                    <li><a  href="{% url 'users:logout' %}">Logout</a></li>
                 {% else %}
                     <li class="{%  block nav_class_signup %}{% endblock %}"><a href="{% url 'users:signup' %}">Signup</a></li>
                     <li class="dropdown" id="menuLogin">

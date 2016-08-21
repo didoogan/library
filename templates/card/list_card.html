@@ -10,10 +10,10 @@
 
     <h2><b>{{ user.username }}</b> card :</h2>
     <div class="container" align="right">
-    {% if user.myuser.image %}
-        <img src="{{ user.myuser.image.url  }}" height="150px">
-    {% endif %}
-    </div>
+        {% if user.myuser.image %}
+            <img src="{{ user.myuser.image.url  }}" height="100px">
+        {% endif %}
+        </div>
     <div class="container">
         <table class="table">
             {% for card in object_list %}
@@ -26,12 +26,12 @@
                 <h4><p align="center">You should begin to read </p></h4>
             {% endfor %}
         </table>
+
+        <a href="{% url 'card:create_view' %}" class="btn btn-success btn-md" >
+        <span class="glyphicon glyphicon-plus"></span> Add new books</a>
+
+        <a href="{% url 'card:delete_view' %}" class="btn btn-success btn-md" >
+        <span class="glyphicon glyphicon-minus"></span> Return books</a>
     </div>
-
-    <p><a href="{% url 'card:create_view' %}" class="btn btn-success btn-lg" >
-    <span class="glyphicon glyphicon-plus"></span> Add new books</a></p>
-
-    <p><a href="{% url 'card:delete_view' %}" class="btn btn-success btn-lg" >
-    <span class="glyphicon glyphicon-plus"></span> Return books</a></p>
 
 {% endblock %}

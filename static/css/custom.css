@@ -5,3 +5,8 @@ h2 {
 .for-two-btn {
     display: block-inline;
 }
+
+.navbar-img {
+    margin: 0;
+    padding: 0;
+}

@@ -8,12 +8,14 @@
 
 {% block content %}
 
-<h3>Author {{ author }} will be removed, are you sure?</h3>
-    <form method="post">
-        {% csrf_token %}
-        <button class="btn btn-danger btn-md" >
-            <span class="glyphicon glyphicon-minus"></span> Delete author
-        </button>
-    </form>
+    <div class="container">
+        <h3>Author {{ author }} will be removed, are you sure?</h3>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger btn-md" >
+                <span class="glyphicon glyphicon-minus"></span> Delete author
+            </button>
+        </form>
+    </div>
 
 {% endblock %}

@@ -8,7 +8,7 @@
 
 {% block content %}
 
-    <h3 align="center"><b>{{ book.title }}</b> has been written by :</h3>
+    <h3 align="center"><b>"{{ book.title }}"</b> has been written by :</h3>
     <div class="container">
         <table class="table">
             {% for author in book.author.all %}
@@ -17,16 +17,12 @@
                 </tr>
             {% endfor %}
         </table>
-    </div>
-    <p>
         <a href="{% url 'books:update_view' book.id %}" class="btn btn-primary">
             <span class="glyphicon glyphicon-edit"></span> Edit book
         </a>
-    </p>
-    <p>
         <a href="{% url 'books:delete_view' book.id %}" class="btn btn-warning" >
             <span class="glyphicon glyphicon-minus"></span> Delete book
         </a>
-    </p>
+    </div>
 
 {% endblock %}

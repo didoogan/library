@@ -18,9 +18,10 @@
                 </tr>
             {% endfor %}
         </table>
-    </div>
 
-    <p><a href="{% url 'authors:create_view' %}" class="btn btn-success btn-lg" >
-    <span class="glyphicon glyphicon-plus"></span> Add new author</a></p>
+        <a href="{% url 'authors:create_view' %}" class="btn btn-success btn-md" >
+            <span class="glyphicon glyphicon-plus"></span> Add new author
+        </a>
+    </div>
 
 {% endblock %}
