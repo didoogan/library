@@ -51,15 +51,12 @@ class CardCreateView(LoginRequiredMixin, FormView):
     def get_form(self, form_class=CardForm):
         form = super(CardCreateView, self).get_form(self.form_class)
         if 'search_book' in self.request.GET:
-            # form.fields['books'].choices = [(o.id, o.title) for o in Book.objects.filter(is_taken=False)]
             data = self.request.GET.get('search_value', None)
             form.fields['books'].choices = ((o.id, o.title) for o in Book.objects.filter(
-                # Q(is_taken=False), Q(author__first_name__icontains=data) |
-                # Q(is_taken=False), Q(author__last_name__icontains=data) |
-                # Q(is_taken=False), Q(author__book__title__icontains=data)
                 (Q(author__first_name__icontains=data) |
                  Q(author__last_name__icontains=data) |
-                 # Q(author.unicode()=data) |
+                 (Q(author__first_name__in=data) & Q(author__last_name__in=data)) |
+                 # Q(author_full_name__icontains=data) |
                  Q(title__icontains=data)) & Q(is_taken=False)
             ).distinct())
         else:

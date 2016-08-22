@@ -41,8 +41,8 @@
       <schema id="10" parent="3" name="public">
         <object-id>2200</object-id>
         <visible>1</visible>
-        <introspection-state-number>1764</introspection-state-number>
-        <introspection-timestamp>2016-08-18.12:56:43.146</introspection-timestamp>
+        <introspection-state-number>1831</introspection-state-number>
+        <introspection-timestamp>2016-08-22.09:01:45.543</introspection-timestamp>
       </schema>
       <schema id="11" parent="3" name="pg_catalog">
         <object-id>11</object-id>
@@ -269,7 +269,7 @@
       </table>
       <table id="68" parent="10" name="card_card">
         <object-id>16902</object-id>
-        <state-number>1764</state-number>
+        <state-number>1831</state-number>
       </table>
       <table id="69" parent="10" name="django_admin_log">
         <object-id>16811</object-id>
@@ -289,7 +289,7 @@
       </table>
       <table id="73" parent="10" name="users_myuser">
         <object-id>16882</object-id>
-        <state-number>1655</state-number>
+        <state-number>1831</state-number>
       </table>
       <column id="74" parent="30" name="id">
         <state-number>674</state-number>
@@ -1639,8 +1639,8 @@ author_id</columns>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
       <foreign-key id="313" parent="68" name="card_card_myuser_id_aaefe40a_fk_users_myuser_id">
-        <object-id>16938</object-id>
-        <columns>myuser_id</columns>
+        <object-id>16959</object-id>
+        <columns>?</columns>
         <ref-key>~.users_myuser.users_myuser_pkey</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
