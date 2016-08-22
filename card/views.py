@@ -55,8 +55,8 @@ class CardCreateView(LoginRequiredMixin, FormView):
             form.fields['books'].choices = ((o.id, o.title) for o in Book.objects.filter(
                 (Q(author__first_name__icontains=data) |
                  Q(author__last_name__icontains=data) |
-                 (Q(author__first_name__in=data) & Q(author__last_name__in=data)) |
-                 # Q(author_full_name__icontains=data) |
+                 # (Q(author__first_name__in=data) & Q(author__last_name__in=data)) |
+                 (Q(author__first_name__in=data.split()) & Q(author__last_name__in=data.split())) |
                  Q(title__icontains=data)) & Q(is_taken=False)
             ).distinct())
         else:
